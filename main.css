@@ -1,0 +1,383 @@
+@font-face {
+    font-family: 'TheFishermans';
+    src: url('assets/TheFishermansNeighborRegular.ttf') format('truetype');
+}
+
+/* Default light theme styles */
+body {
+    background-color: #FFF;
+    color: #333;
+}
+
+body {
+    background-color: #2f2f2f; /* Dark background */
+    color: #FFF; /* Light text */
+}
+
+.navbar {
+    background-color: #222;
+    border-color: #444;
+}
+
+p, li, h1, h2, h3 {
+    color: #CCC; /* Lighter text for readability */
+}
+
+a {
+    color: #4A90E2; /* Ensure links stand out */
+}
+
+
+
+
+
+/* Additional spacing for the row containing the player input and buttons */
+.row {
+    margin-top: 10px; /* Increase this value as needed */
+}
+
+/* Alternatively, you can target the specific column */
+.col {
+    padding-top: 10px; /* Increase this value as needed */
+}
+
+
+
+
+/* Styles for buttons */
+.btn-custom {
+    font-size: 1.3em;    
+    padding: 10px 30px;   
+    border: none;         
+    background-color: #242424; 
+    color: white;         
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); 
+    transition: background-color 0.3s, box-shadow 0.3s; 
+    margin-top: px; 
+  }
+  
+  .btn-custom:hover, .btn-custom:focus {
+    background-color: #242424; 
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3); 
+    transform: scale(1.10);
+  }
+  
+
+  #toggleDarkMode {
+    background-color: #555; 
+  }
+  
+  #toggleDarkMode:hover, #toggleDarkMode:focus {
+    background-color: #666; 
+  }
+  
+
+#canvas {
+    margin: 0px;
+}
+
+#counter {
+    font-size: 100px;
+    font-weight: 600;
+    font-family: 'TheFishermans';
+    transition: .2s;
+}
+
+h1 {
+    font-family: 'TheFishermans';
+}
+
+.subtitle {
+    font-size: small;
+}
+
+.text {
+    font-size: 25;
+    font-family: 'TheFishermans';
+    margin: 0;
+}
+
+
+
+.monitors {
+    padding: 1.5em;
+}
+
+.time {
+    font-family: 'TheFishermans';
+    font-size: small;
+}
+
+#countdown {
+    font-size: 48px;
+    font-weight: bold;
+}
+
+#label-container {
+    display: none;
+}
+
+.centered-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 360px;
+    margin-right: 60;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th {
+    padding: 20px;
+}
+
+td {
+    padding: 10px 0px 5px 10px
+}
+
+.even-list-item {
+    background-color: #fafafa;
+}
+
+.odd-list-item {
+    background-color: #ffffff;
+}
+
+
+
+
+.Exercise {
+    font-size: 2.1em;
+    font-weight: bold; 
+    color: #ffffff;   
+    margin-top: 200px; 
+    position: relative;
+}
+
+.Exercise, .text, #counter {
+    text-align: center; /* Centers the text */
+}
+
+
+.player-display {
+    display: flex;        
+    align-items: center; 
+    font-size: 1.5em;
+    font-family: 'Arial', sans-serif;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.player-label {
+    font-weight: bold;
+    color: #ffffff;
+    margin-right: 10px;  
+}
+
+.player-name {
+    font-weight: normal;
+    color: #ffffff;
+    margin-top: -15px;
+}
+
+
+#startButton {
+    font-size: 2em;    
+    padding: 10px 30px;   
+    border: none;         
+    background-color: #242424; 
+    color: white;         
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); 
+    transition: background-color 0.3s, box-shadow 0.3s; 
+    margin-top: 20px; 
+    display: none; /* Hide the start button initially */
+}
+
+#startButton:hover {
+    background-color: #242424; 
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3); 
+    transform: scale(1.10);
+}
+
+#startButton:active {
+    background-color: #28598A; 
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); 
+}
+
+
+.countdown-overlay {
+    display: none; 
+    position: fixed; /* Overlay takes the whole screen */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 10; /* Above all other elements */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .countdown-text {
+    font-size: 4em; 
+    color: white;
+  }
+  
+  .hidden {
+    display: none;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; 
+    gap: 10px; 
+}
+
+.parent-of-button-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+.modal-title {
+    color: black;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    border: 0px;
+}
+
+.modal-title-endgame {
+    color: black;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    border: 0px;
+}
+
+.modal-body-endgame {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    border: 0px;
+}
+
+.black-p {
+    color: black;
+}
+
+.modal-footer {
+    border: 0px;
+}
+
+.btn-border {
+    border: 1px solid black;
+}
+
+.btn-border:hover {
+    color: black;
+    border: 1px solid black;
+}
+
+
+
+/* Leaderboard Styles */
+#leaderboardSection {
+    list-style-type: none; 
+    padding: 0;
+    width: 100%;
+    max-width: 600px; 
+    margin: auto;
+    margin-top: 30;
+    margin-left: 40;
+}
+
+
+.LeaderboardText {
+    margin-top: 50;
+    margin-left: 100;
+
+}
+
+
+#leaderboardList li {
+    background: #333; 
+    border: 1px solid #EEEEEE; /* Slight border for definition */
+    color: #fff; /* White text */
+    padding: 10px 15px;
+    margin-bottom: 8px; /* Space between items */
+    border-radius: 4px; /* Rounded corners */
+    display: flex;
+    justify-content: space-between; /* Space out name and reps */
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Subtle shadow for depth */
+}
+
+/* Enhancements for first three places */
+#leaderboardList li:nth-child(1) {
+    background: #0c787e; /* Green for first place */
+}
+#leaderboardList li:nth-child(2) {
+    background: #555c66; /* Darker for second place */
+}
+#leaderboardList li:nth-child(3) {
+    background: #393E46; /* Even darker for third place */
+}
+
+/* Adding icons for places */
+#leaderboardList li:nth-child(1)::before {
+    content: "🥇 ";
+}
+#leaderboardList li:nth-child(2)::before {
+    content: "🥈 ";
+}
+#leaderboardList li:nth-child(3)::before {
+    content: "🥉 ";
+}
+
+/* Responsive font size */
+#leaderboardList li {
+    font-size: 1rem;
+}
+
+@media (min-width: 768px) {
+    #leaderboardList li {
+        font-size: 1.2rem;
+    }
+}
+
+
+.user-rank-display {
+    background-color: #444; /* Adjust background color as needed */
+    color: white;
+    border: 1px solid #555; /* Slight border for definition */
+    padding: 15px;
+    margin-top: 20px; /* Space between leaderboard and rank display */
+    border-radius: 4px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Subtle shadow for depth */
+  }
+  
+  .user-rank-display h3 {
+    margin-bottom: 10px; /* Space between the title and rank number */
+  }
+  
+  #userRank {
+    font-size: 2em;
+    margin-bottom: 5px;
+  }
+  
+  #userNameDisplay {
+    font-size: 1.5em;
+  }
+  
