@@ -1,1 +1,1 @@
-Tracks your exercises using AI and computer vision. Original project from: https://github.com/Gabbosaur
+This project uses AI and computer vision to track your exercises. It is based on an original project from https://github.com/Gabbosaur and has been improved with additional features and optimizations.
