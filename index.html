@@ -184,6 +184,9 @@
             <div id="repsCounter" class="hidden">
               <p class="text">REPS</p>
               <div id="counter">0</div>
+              <div class="row">
+                <p id="caloriesDisplay">Calories Burned: 0</p>
+              </div>
             </div>
             <div class="button-container">
               <button id="startButton">
@@ -210,18 +213,23 @@
     <div class="row"></div>
 
     <!-- The end of challenge popup modal -->
-    <div class="modal" tabindex="-1" role="dialog" id="endChallengeModal">
+    <div class="modal" role="dialog" id="endChallengeModal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title-endgame">Challenge Completed!</h5>
           </div>
-          <div class="modal-body-endgame">
-            <p class="black-p" id="finalRepsMessage">
-              Congratulations <span id="username"></span>! You completed
-              <span id="finalRepsCount">0</span> reps!
-            </p>
+          <div class="congratulations">
+            Congratulations <span id="username"></span>!
           </div>
+          <br />
+          <p class="black-p" id="finalRepsMessage">
+            You completed <span id="finalRepsCount">0</span> reps!
+          </p>
+          <br />
+          <p class="black-p" id="finalCaloriesMessage">
+            You burned <span id="finalCaloriesDisplay">0</span> calories!
+          </p>
           <div class="modal-footer">
             <button
               type="button"
@@ -236,7 +244,5 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Add your JavaScript file link here if you have one -->
-    <!-- <script src="path-to-your-app.js"></script> -->
   </body>
 </html>

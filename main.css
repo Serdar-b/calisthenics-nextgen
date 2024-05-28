@@ -3,15 +3,14 @@
     src: url('assets/TheFishermansNeighborRegular.ttf') format('truetype');
 }
 
-/* Default light theme styles */
 body {
     background-color: #FFF;
     color: #333;
 }
 
 body {
-    background-color: #2f2f2f; /* Dark background */
-    color: #FFF; /* Light text */
+    background-color: #2f2f2f; 
+    color: #FFF; 
 }
 
 .navbar {
@@ -20,25 +19,24 @@ body {
 }
 
 p, li, h1, h2, h3 {
-    color: #CCC; /* Lighter text for readability */
+    color: #CCC; 
 }
 
 a {
-    color: #4A90E2; /* Ensure links stand out */
+    color: #4A90E2; 
 }
 
 
 
 
 
-/* Additional spacing for the row containing the player input and buttons */
+
 .row {
-    margin-top: 10px; /* Increase this value as needed */
+    margin-top: 10px; 
 }
 
-/* Alternatively, you can target the specific column */
 .col {
-    padding-top: 10px; /* Increase this value as needed */
+    padding-top: 10px; 
 }
 
 
@@ -146,8 +144,10 @@ td {
     background-color: #ffffff;
 }
 
-
-
+#caloriesDisplay {
+    text-align: center; 
+    font-size: 1.5em;
+}
 
 .Exercise {
     font-size: 2.1em;
@@ -158,7 +158,7 @@ td {
 }
 
 .Exercise, .text, #counter {
-    text-align: center; /* Centers the text */
+    text-align: center; 
 }
 
 
@@ -188,13 +188,13 @@ td {
     font-size: 2em;    
     padding: 10px 30px;   
     border: none;         
-    background-color: #242424; 
+    background-color: #4e8634; 
     color: white;         
     border-radius: 8px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); 
     transition: background-color 0.3s, box-shadow 0.3s; 
     margin-top: 20px; 
-    display: none; /* Hide the start button initially */
+    display: none; 
 }
 
 #startButton:hover {
@@ -211,13 +211,13 @@ td {
 
 .countdown-overlay {
     display: none; 
-    position: fixed; /* Overlay takes the whole screen */
+    position: fixed; 
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5); 
-    z-index: 10; /* Above all other elements */
+    z-index: 10; 
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -313,26 +313,26 @@ td {
 
 #leaderboardList li {
     background: #333; 
-    border: 1px solid #EEEEEE; /* Slight border for definition */
-    color: #fff; /* White text */
+    border: 1px solid #EEEEEE; 
+    color: #fff; 
     padding: 10px 15px;
-    margin-bottom: 8px; /* Space between items */
-    border-radius: 4px; /* Rounded corners */
+    margin-bottom: 8px; 
+    border-radius: 4px; 
     display: flex;
-    justify-content: space-between; /* Space out name and reps */
+    justify-content: space-between; 
     align-items: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Subtle shadow for depth */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); 
 }
 
 /* Enhancements for first three places */
 #leaderboardList li:nth-child(1) {
-    background: #0c787e; /* Green for first place */
+    background: #0c787e; 
 }
 #leaderboardList li:nth-child(2) {
-    background: #555c66; /* Darker for second place */
+    background: #555c66; 
 }
 #leaderboardList li:nth-child(3) {
-    background: #393E46; /* Even darker for third place */
+    background: #393E46; 
 }
 
 /* Adding icons for places */
@@ -359,17 +359,17 @@ td {
 
 
 .user-rank-display {
-    background-color: #444; /* Adjust background color as needed */
+    background-color: #444; 
     color: white;
-    border: 1px solid #555; /* Slight border for definition */
+    border: 1px solid #555; 
     padding: 15px;
-    margin-top: 20px; /* Space between leaderboard and rank display */
-    border-radius: 4px; /* Rounded corners */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Subtle shadow for depth */
+    margin-top: 20px; 
+    border-radius: 4px; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); 
   }
   
   .user-rank-display h3 {
-    margin-bottom: 10px; /* Space between the title and rank number */
+    margin-bottom: 10px; 
   }
   
   #userRank {
@@ -380,4 +380,69 @@ td {
   #userNameDisplay {
     font-size: 1.5em;
   }
+  
+
+  .congratulations {
+    text-align: right; 
+    font-size: 50px; 
+    font-family: 'Arial', sans-serif; 
+    color: #333; 
+    font-weight: bold; 
+    margin-right: 280px; 
+    margin-top: 30px; 
+  }
+  
+  /* Increase the size of the modal */
+  .modal-dialog {
+    max-width: 1000px; 
+  }
+  
+  /* Style the modal content */
+  .modal-content {
+    padding: 20px;
+    background-color: #ffffff; 
+    border-radius: 1px; 
+  }
+  
+  /* Header styling */
+  .modal-header {
+    border-bottom: 1px solid #dee2e6; 
+    background-color: #c7c7c7; 
+    color: white; 
+  }
+  
+  .modal-title-endgame {
+    font-family: 'Arial', sans-serif; 
+    font-size: 24px;
+  }
+  
+  /* Body styling */
+  .modal-body-endgame {
+    font-family: 'Arial', sans-serif; 
+    color: #333; 
+    line-height: 1.5; 
+    padding-top: 40px;
+    text-align: center;
+  }
+  
+  .black-p {
+    font-size: 30px; 
+    text-align: center;
+  }
+  
+  /* Button styling */
+  .btn-border {
+    border: 2px solid #2e2e2e; 
+    color: #2e2e2e; 
+    background-color: transparent; 
+    padding: 10px 20px; 
+    transition: all 0.3s ease; 
+  }
+  
+  .btn-border:hover {
+    background-color: #6c6c6c; 
+    color: white; 
+  }
+  
+  
   

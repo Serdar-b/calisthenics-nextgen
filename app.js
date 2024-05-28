@@ -35,6 +35,8 @@ let endGame = false;
 let endTimer = null;
 let modelDBName = "pullups";
 
+let calories = 0;
+
 let model;
 
 const upSound = new Audio("./sounds/up.mp3");
@@ -79,7 +81,7 @@ document
         exerciseText = "Sit up";
         break;
       case "pushups":
-        modelPath = "./custommodels/pushups.json";
+        modelPath = "./custommodels/pushupsNEW.json";
         exerciseDisplay.textContent = "Exercise: Push-Ups";
         modelDBName = "pushups";
         getLeaderboard("pushups");
@@ -149,7 +151,9 @@ const createPoseLandmarker = async () => {
     runningMode: runningMode,
     numPoses: 1,
   });
-  demosSection.classList.remove("invisible");
+  if(demosSection != null){
+    demosSection.classList.remove("invisible");
+  }
 };
 createPoseLandmarker();
 
@@ -169,7 +173,20 @@ if (hasGetUserMedia()) {
   console.warn("getUserMedia() is not supported by your browser");
 }
 
-document.getElementById("startButton").addEventListener("click", function () {
+const startButton = document.getElementById('startButton');
+
+initializeChallenge();
+
+function initializeChallenge() {
+  startButton.textContent = 'Start';
+  startButton.onclick = startChallenge; 
+}
+
+function startChallenge() {
+
+  startButton.textContent = 'Stop';
+  startButton.onclick = stopChallenge;
+
   $("#endChallengeModal").modal("hide");
   let countdownValue = 3;
   const countdownOverlay = document.getElementById("countdownOverlay");
@@ -202,36 +219,30 @@ document.getElementById("startButton").addEventListener("click", function () {
     }
     countdownValue--;
   }, 1000);
-});
-
-function setupEventListeners() {
-  const startButton = document.getElementById("startButton");
-  if (startButton) {
-    startButton.addEventListener("click", startChallenge);
-  } else {
-    console.error("Start button not found!");
-  }
-
-  // if you want to add more event listeners
-}
-setupEventListeners();
-
-function startChallenge() {
+  updateCaloriesDisplay();
   updateCounter();
+}
+
+function stopChallenge() {
+  if (endTimer !== null) {
+    clearTimeout(endTimer);
+  }
+  endChallenge(); 
+  initializeChallenge(); 
 }
 
 function resetEndTimer() {
   if (endTimer !== null) {
     clearTimeout(endTimer);
   }
-  endTimer = setTimeout(endChallenge, 3000); // how long time after each part of the exercise should you allow before the challenge ends? 3 seconds right now
+  endTimer = setTimeout(endChallenge, 8000); // how long time after each part of the exercise should you allow before the challenge ends? 3 seconds right now
 }
 
 function triggerConfetti() {
   confetti({
-    zIndex: 1000,
-    particleCount: 100,
-    spread: 70,
+    zIndex: 1100,
+    particleCount: 400,
+    spread: 120,
     origin: { y: 0.6 },
   });
 }
@@ -240,12 +251,19 @@ function endChallenge() {
   console.log("Challenge ended due to inactivity.");
   endGame = true;
   startFlag = false;
+  pullupStart = false;
+  upStage = false;
+  middleStage = false;
+  startStage = false;
+
+  initializeChallenge();
 
   // Update the leaderboard with the playerName and the number of reps
   recordExercise(playerName, reps, modelDBName);
 
   // Display the final reps in the popup
   document.getElementById("finalRepsCount").textContent = reps;
+  document.getElementById("finalCaloriesDisplay").textContent = calories;
   document.getElementById("username").textContent = playerName;
 
   // Show the popup
@@ -255,7 +273,31 @@ function endChallenge() {
 
   reps = 0;
   updateCounter();
+  calories = 0;
+  updateCaloriesDisplay()
 }
+
+function burntCalories(){
+  if (modelDBName == "jumping_jacks") {
+    calories += 0.2
+  } else if (modelDBName == "pushups") {
+    calories += 0.32
+  } else if (modelDBName == "situps") {
+    calories += 0.15 
+  } else if (modelDBName == "squats") {
+    calories += 0.32 
+  } else if (modelDBName == "pullups") {
+    calories += 1.0 
+  }
+  
+updateCaloriesDisplay();
+}
+
+function updateCaloriesDisplay() {
+  const caloriesDisplay = document.getElementById('caloriesDisplay');
+  caloriesDisplay.textContent = `Calories Burned: ${calories}`;
+}
+
 
 function updateBar(prediction) {
   const increaseSpeed = "0.2s"; // Speed for the bar to go up lower value faster for both
@@ -384,12 +426,14 @@ function updateCounter() {
   counter.textContent = reps;
 }
 
+
 let probabilityCap = 0.7;
 let upStage = false;
 let middleStage = false;
 let startStage = false;
 let reps = 0;
 let counter;
+let pullupStart = false;
 
 const classNames = ["down", "middle", "up"];
 
@@ -420,7 +464,7 @@ async function predictWebcam() {
 
       // Define the ROI coordinates
       const minX = canvasElement.width * 0.3 / canvasElement.width;  
-      const maxX = canvasElement.width * 0.7 / canvasElement.width ;  
+      const maxX = canvasElement.width * 0.7 / canvasElement.width;  
       const minY = 0.0; 
       const maxY = canvasElement.height * 1.0 / canvasElement.height; 
 
@@ -428,7 +472,6 @@ async function predictWebcam() {
 
       if (result.worldLandmarks && result.worldLandmarks[0]) {
     
-
         let centerX = (result.landmarks[0][23].x + result.landmarks[0][24].x)/2.0
         let centerY =  result.landmarks[0][23].y
 
@@ -439,9 +482,12 @@ async function predictWebcam() {
           for (const landmark of result.landmarks) {  
             drawingUtils.drawLandmarks(landmark, {
               radius: (data) => DrawingUtils.lerp(data.from.z, -0.15, 0.1, 5, 1),
+              color: "#f53636",
+              fillColor: "#000000"
             });
             drawingUtils.drawConnectors(landmark, PoseLandmarker.POSE_CONNECTIONS, {
-              radius: 0.1,
+              lineWidth: 5,
+              color: "#f53636"
             });
           }
 
@@ -452,7 +498,13 @@ async function predictWebcam() {
                 l.y,
                 l.z,
               ]);
-  
+
+              const normalizedLandmarks = result.landmarks[0].flatMap((l) => [
+                l.x,
+                l.y,
+                l.z,
+              ]);
+
               const inputData = tf.tensor2d([landmarks], [1, 99]);
               const prediction = model.predict(inputData);
               const predictedClassIndex = prediction.argMax(1);
@@ -466,7 +518,9 @@ async function predictWebcam() {
                 if (modelDBName == "jumping_jacks") {
                   probabilityCap = 0.8;
                 } else if (modelDBName == "pushups") {
-                  probabilityCap = 0.6;
+                  probabilityCap = 0.5;
+                } else if (modelDBName == "pullups") {
+                  probabilityCap = 0.5;
                 } else {
                   probabilityCap = 0.7;
                 }
@@ -475,27 +529,72 @@ async function predictWebcam() {
                     startStage = true;
                   }
                   if (startStage) {
-                    if (className === "up" && !upStage) {
-                      upStage = true;
-                      playSound(upSound, 0.3);
-  
-                      if (reps >= 1) {
-                        resetEndTimer();
+
+                    if (modelDBName == "pullups"){
+
+                      if(className === "down"){
+                        pullupStart = true
                       }
-                    } else if (className === "middle" && !middleStage) {
-                      middleStage = true;
-                    } else if (className === "down" && middleStage && upStage) {
-                      reps += 1;
-                      playSound(beepSound, 0.3);
-                      updateCounter();
-  
-                      if (reps >= 1) {
-                        resetEndTimer();
+
+                      if (pullupStart) {
+                        if (className === "up" && !upStage) {
+                          upStage = true;
+                          playSound(upSound, 0.3);
+    
+                          if (reps >= 1) {
+                            resetEndTimer();
+                          }
+
+                        } else if (className === "middle" && !middleStage) {
+                          middleStage = true;
+                        } else if (className === "down" && middleStage && upStage) {
+
+                          reps += 1;
+                          burntCalories()
+                          playSound(beepSound, 0.3);
+                          updateCounter();
+
+                          if (reps >= 1) {
+                            resetEndTimer();
+                          }
+      
+                          middleStage = false;
+                          upStage = false;
+                        }  
+
                       }
-  
-                      middleStage = false;
-                      upStage = false;
+
+
+
+                    } else {
+
+                      if (className === "up" && !upStage) {
+                        upStage = true;
+                        playSound(upSound, 0.3);
+    
+                        if (reps >= 1) {
+                          resetEndTimer();
+                        }
+                      } else if (className === "middle" && !middleStage) {
+                        middleStage = true;
+                      } else if (className === "down" && middleStage && upStage) {
+                        reps += 1;
+                        burntCalories()
+                        playSound(beepSound, 0.3);
+                        updateCounter();
+    
+                        if (reps >= 1) {
+                          resetEndTimer();
+                        }
+    
+                        middleStage = false;
+                        upStage = false;
+                      }
+
                     }
+
+
+
                   }
                 }
   
