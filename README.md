@@ -1,5 +1,4 @@
-This project uses AI and computer vision to track your exercises. It is based on an original project from https://github.com/Gabbosaur and has been improved with additional features and optimizations.
-
+This project uses AI and computer vision to track your exercises and counts correct movement with custom machine learning models. It has a leaderboard so you can compete with others to see who can do the most repetitions. It is based on an original project from https://github.com/Gabbosaur and has been improved with additional features and optimizations.
 
 ## Prerequisites
 
