@@ -72,43 +72,48 @@ This guide will help you create and integrate custom models for different exerci
    elif k == ord('s'):
        export_landmark(results, 'down')
 
-** Training and Testing the Model **
+## Training and Testing the Model
 
-Create the Model:
+### Create the Model:
+- Open `modelcreate.py`.
+- Update `EXPORT_PATH` with your CSV file path and `MODEL_PATH` with your desired model name.
+- Run the script to generate the model in the `models` folder.
 
-Open modelcreate.py.
-Update EXPORT_PATH with your CSV file path and MODEL_PATH with your desired model name.
-Run the script to generate the model in the models folder.
-Test the Model:
+### Test the Model:
+- Open `modeltest.py`.
+- Set `MODEL_PATH` to your new model file.
+- Execute the script to test the model's performance.
 
-Open modeltest.py.
-Set MODEL_PATH to your new model file.
-Execute the script to test the model's performance.
-Creating a TensorFlow.js Model
-Prepare the TensorFlow.js Model:
+## Creating a TensorFlow.js Model
 
-Go to the createTFjsModel folder.
-In script.js, replace the model name in the model.save method to your new model's name:
-javascript
-Copy code
-document.getElementById('downloadModel').addEventListener('click', async () => {
-  await model.save('downloads://pushups');
-});
-Use the Model in a Web Browser:
+### Prepare the TensorFlow.js Model:
+- Go to the `createTFjsModel` folder.
+- In `script.js`, replace the model name in the `model.save` method to your new model's name:
+  ```javascript
+  document.getElementById('downloadModel').addEventListener('click', async () => {
+    await model.save('downloads://pushups');
+  });
 
-Open index.html in your browser.
-Choose your csv file and load the data, then download the model to get the .json file and weights.bin file.
-If you want to make a test prediction, place the model in the models folder within createTFjsModel and click 'Predict with Random Data'.
-Integrating the Model into the Main Application
-Add the Model to the Application:
 
-In app.js, follow the existing examples to initialize your new model within the switch cases.
+## Use the Model in a Web Browser
 
-Update the Model Selector in index.html:
+1. Open `index.html` in your browser.
+2. Choose your CSV file and load the data, then download the model to get the `.json` file and `weights.bin` file.
+3. If you want to make a test prediction, place the model in the `models` folder within `createTFjsModel` and click 'Predict with Random Data'.
+
+## Integrating the Model into the Main Application
+
+### Add the Model to the Application
+
+Put the weight.bin and .json files that you downloaded inside the custommodels folder.
+
+- In `app.js`, follow the existing examples to initialize your new model within the switch cases.
+
+### Update the Model Selector in `index.html`
 
 Add a new option for your model in the model selector dropdown:
-html
-Copy code
+
+```html
 <select id="modelSelector" class="form-control">
   <option value="pullups">Pullups</option>
   <option value="squats">Squats</option>
@@ -116,8 +121,5 @@ Copy code
   <option value="pushups">Pushups</option>
   <option value="jumpingjacks">Jumping Jacks</option>
   <!-- Add new model option here -->
-  <option value="newmodel">New Model</option>  <!-- Add new model option here --> should be the same name in the app.js initialization.
+  <option value="newmodel">New Model</option> <!-- Add new model option here --> should be the same name in the app.js initialization.
 </select>
-
-
-Once you've followed these steps, your new model should work within the application.
