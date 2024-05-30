@@ -105,7 +105,7 @@ This guide will help you create and integrate custom models for different exerci
 
 ### Add the Model to the Application
 
-Put the weight.bin and .json files that you downloaded inside the custommodels folder.
+Put the `weights.bin` and `.json` files that you downloaded inside the `custommodels` folder.
 
 - In `app.js`, follow the existing examples to initialize your new model within the switch cases.
 
@@ -113,17 +113,16 @@ Put the weight.bin and .json files that you downloaded inside the custommodels f
 
 Add a new option for your model in the model selector dropdown:
 
-   ```html
-   <select id="modelSelector" class="form-control">
-     <option value="pullups">Pullups</option>
-     <option value="squats">Squats</option>
-     <option value="situps">Situps</option>
-     <option value="pushups">Pushups</option>
-     <option value="jumpingjacks">Jumping Jacks</option>
-     <!-- Add new model option here -->
-     <option value="newmodel">New Model</option> <!-- should be the same name in the app.js initialization. -->
-   </select>
+```html
+<select id="modelSelector" class="form-control">
+  <option value="pullups">Pullups</option>
+  <option value="squats">Squats</option>
+  <option value="situps">Situps</option>
+  <option value="pushups">Pushups</option>
+  <option value="jumpingjacks">Jumping Jacks</option>
+  <!-- Add new model option here -->
+  <option value="newmodel">New Model</option> <!-- should be the same name in the app.js initialization. -->
+</select>
+```
 
-Once you've followed these steps, your new model should work within the application.
-
-
+## Once you've followed these steps, your new model should work within the application.
